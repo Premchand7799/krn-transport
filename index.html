@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRN Transport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #f3f4f6; 
+
+        }
+
+        
+        .transition-all {
+
+            transition: all 0.3s ease-in-out;
+
+        }
+       
+
+        .main-card {
+
+            background-color: white;
+
+            border-radius: 0.75rem;
+
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+            padding: 2rem;
+
+            width: 100%;
+
+            max-width: 500px;
+
+        }
+        /* Make details card wider for more columns */
+        #details-page {
+            max-width: 800px;
+        }
+
+    </style>
+
+  <style>
+
+.follow {
+
+     
+
+      text-align: center;
+
+      font-size: 20px;
+
+      margin-bottom: 6px;
+
+      font-weight: bold;
+
+      background: gray;
+
+      //#007bff;
+
+    //  #3bb143;
+
+      width: 150px;
+
+      margin-left: auto;
+
+      margin-right: auto;
+
+      border-radius: 30px
+
+  }
+
+ 
+
+ .icons1 {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap:35px;
+
+    width:260px;
+
+ max-width: 500px;
+
+ margin: auto;
+
+ text-align: center;
+
+   }
+
+  .icons1 > .icon {
+
+        font-size: 26px;
+
+       text-decoration: none; 
+
+       color: white !important                               
+
+  }  
+
+ 
+
+   footer   {
+
+        background: black;
+
+        color: white;
+
+        padding-bottom: 1px;
+
+        text-align: center;
+
+        border-radius: 40px 40px 0 0;
+
+        padding-top: 5px;
+
+    }
+
+    
+    .footer-ite {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;   
+
+    }
+
+    
+    footer .ll {
+
+    min-width:200px;
+
+  margin-left:auto;   
+
+  margin-right:auto;
+
+  display:block;
+
+  text-align:center;
+
+    }
+
+    hr {
+
+        background-color: black;
+
+        color: white 
+
+    }
+
+    
+     .fa-truck.reversed {
+
+        transform: scaleX(-1);
+
+    }   
+
+     
+
+  </style>
+    
+</head>
+
+<body class="antialiased text-gray-800">
+    <!-- Header with Navigation -->
+
+  <header class="bg-white shadow-md">
+
+        <nav class="sticky top-0 z-50 bg-gray-800 text-white rounded-b-2xl shadow-xl">
+
+            <div class="container mx-auto px-4 py-2 flex justify-between items-center flex-wrap">
+
+                <p class="text-3xl font-bold tracking-wide">KRN Transport <span class="fa-solid fa-truck" style="font-size:23px;"></span></p>
+
+                <div class="flex items-center space-x-1 md:space-x-6 text-sm md:text-base">
+
+                    <button id="nav-upload-btn" class="p-2 hover:bg-gray-700 rounded-full transition-all duration-300">Upload</button>
+
+                    <!-- Create LR Button Added -->
+
+                    <button id="nav-download-btn" class="p-2 hover:bg-gray-700 rounded-full transition-all duration-300">Download</button>
+
+                    <button id="nav-delete-btn" class="p-2 hover:bg-gray-700 rounded-full transition-all duration-300">Delete</button>
+
+                    <button id="nav-create-lr-btn" class="p-2 hover:bg-gray-700 rounded-full transition-all duration-300">Diesel</button>
+                    <!-- NEW DETAILS BUTTON ADDED -->
+                    <button id="nav-details-btn" class="p-2 hover:bg-gray-700 rounded-full transition-all duration-300">Details</button>
+
+                </div>
+
+            </div>
+
+        </nav>      
+
+    </header>  
+    <!-- Main Content Area -->
+
+    <main class="container mx-auto px-6 py-12 flex items-start justify-center ">
+
+        
+        <!-- Upload Page -->
+
+        <div id="upload-page" class="main-card">
+
+            <h1 class="text-3xl font-bold text-center mb-2">Upload POD</h1>
+
+            <p class="text-gray-500 text-center mb-8">Enter a Trip ID to begin the POD uploading process.</p>
+
+            <div class="space-y-6">
+
+                <div>
+
+                    <label for="trip-id-check" class="block text-sm font-medium text-gray-700 mb-1">Trip ID</label>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+
+                        <input type="number" id="trip-id-check" name="trip-id-check" placeholder="Enter a trip id to upload" class="flex-grow w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-all">
+
+                        <button id="check-btn" class="w-full sm:w-auto bg-blue-600 text-white font-semibold px-3 py-2 rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">Check</button>
+
+                    </div>
+
+                </div>
+
+                <div id="file-upload-section" class="hidden space-y-4">
+
+                    <p class="text-sm text-green-600 font-medium">✔️ This document hasn't been uploaded yet. You can upload it now.</p>
+
+                    <div>
+
+                        <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-1">Upload File</label>
+
+                        <input type="file" id="file-upload" name="file-upload" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+
+                    </div>
+
+                     <button id="upload-btn" class="w-full bg-green-600 text-white font-semibold px-2 py-3 rounded-3xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all">Upload POD</button>
+
+                </div>
+
+            </div>
+
+        </div>      
+
+        
+        <!-- Create LR Page (New) -->
+
+        <div id="create-lr-page" class="main-card hidden">
+
+            <h1 class="text-3xl font-bold text-center mb-2">Create Diesel coupon</h1>
+
+            <p class="text-gray-500 text-center mb-8">Fill in the details below to create a new LR.</p>
+
+            <div class="space-y-4">
+
+                <div>
+
+                    <label for="vehicle-number" class="block text-sm font-medium text-gray-700 mb-1">Vehicle Number</label>
+  <select id="vehicle-number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+
+                        <option value="AP09Y9968">AP09Y9968</option>
+
+                        <option value="AP09TA0182">AP09TA0182</option>
+                        <option value="TS07UJ5744">TS07UJ5744</option>
+
+                        <option value="HR55L3431">HR55L3431</option>
+
+                    </select>
+                 <!--  <input type="text" id="vehicle-number" placeholder="Enter a vehicle number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+ -->
+                </div>
+
+                <!-- From and To Code fields added -->
+
+                 <div>
+
+                    <label for="from-code" class="block text-sm font-medium text-gray-700 mb-1">From Code</label>
+
+                    <select id="from-code" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+
+                        <option value="HDZ4">HDZ4</option>
+
+                        <option value="Jami">Jami</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="to-code" class="block text-sm font-medium text-gray-700 mb-1">To Code</label>
+
+                    <select id="to-code" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+
+                        <option value="select to code">Select to code</option>
+
+                        <option value="Bobbili">Bobbili</option>
+
+                        <option value="Palasa">Palasa</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="trip-id-lr" class="block text-sm font-medium text-gray-700 mb-1">Trip ID</label>
+
+                    <input type="number" id="trip-id-lr" placeholder="Enter a trip ID" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+
+                </div>
+
+                <div>
+
+                    <label for="lr-date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+
+                    <input type="date" id="lr-date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+
+                </div>
+
+                 <div>
+
+                    <label for="litres" class="block text-sm font-medium text-gray-700 mb-1">Litres</label>
+
+                    <input type="number" id="litres" placeholder="Enter litres" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+
+                </div>
+
+                <button id="create-lr-submit-btn" class="w-full bg-indigo-600 text-white font-semibold px-3 py-2 rounded-3xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">Submit</button>
+
+            </div>
+
+            
+            <hr class="my-8 border-gray-300">
+
+            
+            <div class="space-y-4">
+
+                 <h2 class="text-xl font-bold text-center">Download diesel coupan</h2>
+
+                 <div>
+
+                    <label for="trip-id-lr-download" class="block text-sm font-medium text-gray-700 mb-1">Enter Trip ID to Download</label>
+
+                    <input type="number" id="trip-id-lr-download" placeholder="Enter Trip ID to download LR image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 transition-all">
+
+                </div>
+
+                <button id="download-lr-btn" class="w-full bg-green-600 text-white font-semibold px-3 py-2 rounded-3xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all">Download</button>
+
+            </div>
+
+        </div>
+        <!-- Download Page -->
+
+        <div id="download-page" class="main-card hidden">
+
+            <h1 class="text-3xl font-bold text-center mb-2">Download POD</h1>
+
+            <p class="text-gray-500 text-center mb-8">Enter the Trip ID of the document you want to download.</p>
+
+            <div class="space-y-6">
+
+                 <div>
+
+                    <label for="trip-id-download" class="block text-sm font-medium text-gray-700 mb-1">Trip ID</label>
+
+                    <input type="number" id="trip-id-download" name="trip-id-download" placeholder="Enter Trip ID to download" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 transition-all">
+
+                </div>
+
+                <button id="download-btn" class="w-full bg-green-600 text-white font-semibold px-3 py-2 rounded-3xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all">Download POD</button>
+
+            </div>
+
+        </div>
+        <!-- Delete Page -->
+
+        <div id="delete-page" class="main-card hidden">
+
+            <h1 class="text-3xl font-bold text-center mb-2">Delete POD</h1>
+
+            <p class="text-gray-500 text-center mb-8">Enter the Trip ID of the document you want to delete.</p>
+
+            <div class="space-y-6">
+
+                 <div>
+
+                    <label for="trip-id-delete" class="block text-sm font-medium text-gray-700 mb-1">Trip ID</label>
+
+                    <input type="number" id="trip-id-delete" name="trip-id-delete" placeholder="Enter Trip ID to delete" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 transition-all">
+
+                </div>
+
+                <button id="delete-btn" class="w-full bg-red-600 text-white font-semibold px-3 py-2 rounded-3xl hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all">Delete POD</button>
+
+            </div>
+
+        </div>
+
+        <!-- NEW DETAILS PAGE -->
+        <div id="details-page" class="main-card hidden w-full">
+            <h1 class="text-3xl font-bold text-center mb-2">Trip full Details</h1>
+            <p class="text-gray-500 text-center mb-8">Select a date range to view details.</p>
+            
+            <!-- Date Range Selection -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <div>
+              <center>      <label for="from-date" class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
+                    <input type="date" id="from-date" class="w-full px-8 py-2 border border-gray-300 rounded-3xl focus:ring-blue-500 focus:border-blue-500 transition-all">
+         </center>       </div>
+                <div>
+                <center>    <label for="to-date" class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
+                    <input type="date" id="to-date" class="w-full px-8 py-2 border border-gray-300 rounded-3xl focus:ring-blue-500 focus:border-blue-500 transition-all"> </center>
+                </div>
+                <div class="pt-5 sm:pt-0">
+                    <button id="search-details-btn" class="w-full sm:w-auto bg-blue-600 text-white font-semibold px-6 py-2 rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">Search</button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div id="details-results" class="hidden space-y-6">
+                <!-- Summary Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-blue-100 p-4 rounded-lg shadow">
+                        <p class="text-sm font-medium text-blue-800">Total LRs</p>
+                        <p id="total-lrs-stat" class="text-3xl font-bold text-blue-900">0</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg shadow">
+                        <p class="text-sm font-medium text-green-800">Uploaded</p>
+                        <p id="uploaded-lrs-stat" class="text-3xl font-bold text-green-900">0</p>
+                    </div>
+                    <div class="bg-red-100 p-4 rounded-lg shadow">
+                        <p class="text-sm font-medium text-red-800">Pending</p>
+                        <p id="pending-lrs-stat" class="text-3xl font-bold text-red-900">0</p>
+                    </div>
+                </div>
+                
+                <!-- Details List Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow">
+                        <!-- MODIFIED TABLE HEAD -->
+                        <thead class="bg-gray-100 text-gray-900">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S.No</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle No.</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trip ID</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Litres</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="details-list-body" class="divide-y divide-gray-200">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+<footer class="container-fluid bg-gray-800">
+
+ <div class="footer-items">
+
+ 
+
+<p class="follow text-white-500" style ="margin-top: 10px;margin-top:15px;">About Us </p>
+
+        <div style="font-size:18px">
+
+        <p><span class="icon fa-solid fa-truck"></span> KRN Transport <span class="icon fa-solid fa-truck reversed"></span></p> <p> <span class="fa-solid fa-location-dot"></span>
+
+   Sontyam, Visakhapatnam, 531173</p> <p> <span class="icon fa fa-phone"></span> +91 1234567890</p> <p>
+
+  <span class="icon fas fa-envelope"></span> krntransport@gmail.com </p>
+
+        </div>                
+
+        
+
+        <p class="text-gray-400" style="margin-bottom:1px;font-size:14px" class="ll"> KRN &copy; 2025 | All rights reserved </p> 
+
+</footer>   
+
+    
+    <!-- Alert/Notification Container -->
+
+    <div id="alert-container" class="fixed top-5 right-5 z-50 w-full max-w-xs sm:max-w-sm"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DOM Element References ---
+
+            const uploadPage = document.getElementById('upload-page');
+
+            const deletePage = document.getElementById('delete-page');
+
+            const downloadPage = document.getElementById('download-page');
+
+            const createLrPage = document.getElementById('create-lr-page');
+            const detailsPage = document.getElementById('details-page'); // NEW
+
+            const navUploadBtn = document.getElementById('nav-upload-btn');
+
+            const navDeleteBtn = document.getElementById('nav-delete-btn');
+
+            const navDownloadBtn = document.getElementById('nav-download-btn');
+
+            const navCreateLrBtn = document.getElementById('nav-create-lr-btn');
+            const navDetailsBtn = document.getElementById('nav-details-btn'); // NEW
+
+            const checkBtn = document.getElementById('check-btn');
+
+            const uploadBtn = document.getElementById('upload-btn');
+
+            const deleteBtn = document.getElementById('delete-btn');
+
+            const downloadBtn = document.getElementById('download-btn');
+
+            
+            const tripIdCheckInput = document.getElementById('trip-id-check');
+
+            const tripIdDeleteInput = document.getElementById('trip-id-delete');
+
+            const tripIdDownloadInput = document.getElementById('trip-id-download');
+
+            
+            const fileUploadSection = document.getElementById('file-upload-section');
+
+            const fileUploadInput = document.getElementById('file-upload');
+
+            const alertContainer = document.getElementById('alert-container');
+
+            // --- LR elements ---
+
+            const createLrSubmitBtn = document.getElementById('create-lr-submit-btn');
+
+            const downloadLrBtn = document.getElementById('download-lr-btn');
+
+            const vehicleNumberInput = document.getElementById('vehicle-number');
+
+            const fromCodeSelect = document.getElementById('from-code'); // New
+
+            const toCodeSelect = document.getElementById('to-code'); // New
+
+            const tripIdLrInput = document.getElementById('trip-id-lr');
+
+            const lrDateInput = document.getElementById('lr-date');
+
+            const litresInput = document.getElementById('litres');
+
+            const tripIdLrDownloadInput = document.getElementById('trip-id-lr-download');
+            
+            // --- Details Page Elements (NEW) ---
+            const fromDateInput = document.getElementById('from-date');
+            const toDateInput = document.getElementById('to-date');
+            const searchDetailsBtn = document.getElementById('search-details-btn');
+            const detailsResults = document.getElementById('details-results');
+            const totalLrsStat = document.getElementById('total-lrs-stat');
+            const uploadedLrsStat = document.getElementById('uploaded-lrs-stat');
+            const pendingLrsStat = document.getElementById('pending-lrs-stat');
+            const detailsListBody = document.getElementById('details-list-body');
+
+
+            // --- In-memory Databases ---
+
+            let uploadedPods = []; // Stores { tripId, file }
+
+            let lrData = []; // Stores { vehicleNumber, fromCode, toCode, tripId, date, litres }
+
+            /**
+
+             * Shows a dismissible alert message.
+
+             */
+
+            function showAlert(message, type = 'success') {
+
+                const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+
+                const alertDiv = document.createElement('div');
+
+                const animationDuration = 300;
+
+                alertDiv.className = `p-4 rounded-xl text-white shadow-lg mb-3 ${bgColor} transform transition-all duration-${animationDuration} translate-x-full opacity-0`;
+
+                alertDiv.textContent = message;                               
+
+                alertContainer.appendChild(alertDiv);
+
+                                              
+
+                requestAnimationFrame(() => {
+
+                    alertDiv.classList.remove('translate-x-full', 'opacity-0');
+
+                    alertDiv.classList.add('translate-x-0', 'opacity-100');
+
+                }); 
+
+                                          
+
+                setTimeout(() => {
+
+                    alertDiv.classList.remove('translate-x-0', 'opacity-100');
+
+                    alertDiv.classList.add('translate-x-full', 'opacity-0');
+
+                    setTimeout(() => {
+
+                        alertDiv.remove();
+
+                    }, animationDuration); 
+
+                }, 3000); 
+
+            }
+            /**
+
+             * Manages page visibility and active navigation button styles.
+
+             */
+
+            function showPage(pageToShow) {
+
+                // Hide all pages
+                [uploadPage, downloadPage, deletePage, createLrPage, detailsPage].forEach(page => page.classList.add('hidden'));
+
+                // Reset all nav button styles
+                [navUploadBtn, navDownloadBtn, navDeleteBtn, navCreateLrBtn, navDetailsBtn].forEach(btn => {
+                    btn.classList.remove('text-amber-300', 'font-bold');
+
+                });
+
+                // Show the selected page and set its nav button to active
+
+                if (pageToShow === 'upload') {
+
+                    uploadPage.classList.remove('hidden');
+
+                    navUploadBtn.classList.add('text-amber-300', 'font-bold');
+
+                } else if (pageToShow === 'download') {
+
+                    downloadPage.classList.remove('hidden');
+
+                    navDownloadBtn.classList.add('text-amber-300', 'font-bold');
+
+                } else if (pageToShow === 'delete') {
+
+                    deletePage.classList.remove('hidden');
+
+                    navDeleteBtn.classList.add('text-amber-300', 'font-bold');
+
+                } else if (pageToShow === 'create-lr') {
+
+                    createLrPage.classList.remove('hidden');
+
+                    navCreateLrBtn.classList.add('text-amber-300', 'font-bold');
+
+                } else if (pageToShow === 'details') { // NEW
+                    detailsPage.classList.remove('hidden');
+                    navDetailsBtn.classList.add('text-amber-300', 'font-bold');
+                }
+
+                
+                // Reset input fields
+
+                tripIdCheckInput.value = '';
+
+                tripIdDeleteInput.value = '';
+
+                tripIdDownloadInput.value = '';
+
+                fileUploadInput.value = '';
+
+                fileUploadSection.classList.add('hidden');
+
+                // Reset LR fields
+
+                vehicleNumberInput.value = '';
+
+                fromCodeSelect.value = 'HDZ4'; // Reset dropdown
+
+                toCodeSelect.value = 'Select to code'; // Reset dropdown
+
+                tripIdLrInput.value = '';
+
+                lrDateInput.value = '';
+
+                litresInput.value = '';
+
+                tripIdLrDownloadInput.value = '';
+
+                // NEW: Reset details page
+                fromDateInput.value = '';
+                toDateInput.value = '';
+                detailsResults.classList.add('hidden');
+            }           
+
+            
+            // --- Event Listeners ---
+
+            
+            checkBtn.addEventListener('click', () => {
+                const tripId = parseInt(tripIdCheckInput.value, 10);
+                if (!tripId) {
+                    showAlert('Please enter a valid Trip ID.', 'error');
+                    fileUploadSection.classList.add('hidden'); // Ensure section is hidden
+                    return;
+                }
+
+                // --- MODIFIED LOGIC: Check if the Trip ID exists in the diesel (lrData) database first. ---
+                const lrExists = lrData.some(lr => lr.tripId === tripId);
+
+                if (!lrExists) {
+                    showAlert('Please enter a valid Trip ID. This ID was not found in the Diesel records.', 'error');
+                    fileUploadSection.classList.add('hidden');
+                    return;
+                }
+
+                // If it exists in Diesel records, now check if it's already been uploaded.
+                const alreadyUploaded = uploadedPods.some(pod => pod.tripId === tripId);
+
+                if (alreadyUploaded) {
+                    showAlert("Document for this Trip ID has already been uploaded.", 'error');
+                    fileUploadSection.classList.add('hidden');
+                } else {
+                    showAlert("This document hasn't been uploaded yet. You can upload it now.", 'success');
+                    fileUploadSection.classList.remove('hidden');
+                }
+            });
+
+            uploadBtn.addEventListener('click', () => {
+
+                const tripId = parseInt(tripIdCheckInput.value, 10);
+
+                const file = fileUploadInput.files[0];
+
+                if (!file) {
+
+                    showAlert('Please select a file to upload.', 'error');
+
+                     return;
+
+                }
+
+                uploadedPods.push({ tripId, file });
+
+                showAlert(`Document for Trip ID ${tripId} uploaded successfully!`, 'success');
+
+                console.log('Current POD Database:', uploadedPods);
+
+                
+                tripIdCheckInput.value = '';
+
+                fileUploadInput.value = '';
+
+                fileUploadSection.classList.add('hidden');
+
+            });
+            downloadBtn.addEventListener('click', () => {
+
+                const tripId = parseInt(tripIdDownloadInput.value, 10);
+
+                if (!tripId) {
+
+                    showAlert('Please enter a valid Trip ID.', 'error');
+
+                    return;
+
+                }
+
+                const podToDownload = uploadedPods.find(pod => pod.tripId === tripId);
+
+                if (podToDownload) {
+
+                    const file = podToDownload.file;
+
+                    const link = document.createElement('a');
+
+                    const url = URL.createObjectURL(file);
+
+                    link.href = url;
+
+                    link.download = file.name;
+
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                    document.body.removeChild(link);
+
+                    window.URL.revokeObjectURL(url);
+
+                    showAlert(`Downloading POD for Trip ID ${tripId}.`, 'success');
+
+                    tripIdDownloadInput.value = '';
+
+                } else {
+
+                    showAlert('No document found for this Trip ID.', 'error');
+
+                }
+
+            });
+            deleteBtn.addEventListener('click', () => {
+
+                const tripId = parseInt(tripIdDeleteInput.value, 10);
+
+                if (!tripId) {
+
+                    showAlert('Please enter a valid Trip ID.', 'error');
+
+                    return;
+
+                }
+
+                const index = uploadedPods.findIndex(pod => pod.tripId === tripId);
+
+                if (index > -1) {
+
+                    uploadedPods.splice(index, 1);
+
+                    showAlert(`Document for Trip ID ${tripId} has been deleted.`, 'success');
+
+                    console.log('Current POD Database:', uploadedPods);
+
+                    tripIdDeleteInput.value = '';
+
+                } else {
+
+                    showAlert('No document found for this Trip ID.', 'error');
+
+                }
+
+            });    
+            // --- LR Event Listeners ---
+
+            createLrSubmitBtn.addEventListener('click', () => {
+
+                const vehicleNumber = vehicleNumberInput.value.trim().toUpperCase();
+
+                const fromCode = fromCodeSelect.value;
+
+                const toCode = toCodeSelect.value;
+
+                const tripId = parseInt(tripIdLrInput.value, 10);
+
+                const date = lrDateInput.value;
+
+                const litres = parseFloat(litresInput.value);
+                if (!vehicleNumber || !fromCode || toCode === "Select to code" || !tripId || !date || isNaN(litres)) {
+
+                    showAlert('Please fill out all fields correctly.', 'error');
+
+                    return;
+
+                }
+                const alreadyExists = lrData.some(lr => lr.tripId === tripId);
+
+                if (alreadyExists) {
+
+                    showAlert(`An LR with Trip ID ${tripId} already exists.`, 'error');
+
+                    return;
+
+                }
+                lrData.push({ vehicleNumber, fromCode, toCode, tripId, date, litres });
+
+                showAlert(`LR for Trip ID ${tripId} created successfully!`, 'success');
+
+                console.log('Current LR Database:', lrData);
+                // Reset LR form
+
+                vehicleNumberInput.value = '';
+
+                fromCodeSelect.value = 'HDZ4';
+
+                toCodeSelect.value = 'Select to code';
+
+                tripIdLrInput.value = '';
+
+                lrDateInput.value = '';
+
+                litresInput.value = '';
+
+            });
+            downloadLrBtn.addEventListener('click', () => {
+
+                const tripId = parseInt(tripIdLrDownloadInput.value, 10);
+
+                if (!tripId) {
+
+                    showAlert('Please enter a Trip ID to download.', 'error');
+
+                    return;
+
+                }
+                const lr = lrData.find(d => d.tripId === tripId);
+                if (!lr) {
+
+                    showAlert(`No LR found for Trip ID ${tripId}.`, 'error');
+
+                    return;
+
+                }
+
+            
+// --- Canvas to JPG Generation ---
+
+const canvas = document.createElement('canvas');
+
+canvas.width = 500;
+
+canvas.height = 350; // Increased height for new fields
+
+const ctx = canvas.getContext('2d');
+// Background
+
+ctx.fillStyle = '#ffffff';
+
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Border
+
+ctx.strokeStyle = '#333';
+
+ctx.lineWidth = 2;
+
+ctx.strokeRect(0, 0, canvas.width, canvas.height);
+// Header
+
+ctx.fillStyle = 'red';
+
+ctx.font = 'bold 28px Inter, sans-serif';
+
+ctx.textAlign = 'center';
+
+ctx.fillText('KRN - Diesel Coupon', canvas.width / 2, 50);
+// Details
+
+ctx.textAlign = 'left';
+
+const textYStart = 100;
+
+const lineHeight = 30;
+
+const textX = 50;
+
+const valueColumnX = 300; // fixed column for all values
+// Helper to draw label + right-aligned value
+
+function drawLabelValue(label, value, y, labelStyle, valueStyle, valueColor) {
+
+    // Label (left aligned)
+
+    ctx.fillStyle = '#000';
+
+    ctx.font = labelStyle;
+
+    ctx.textAlign = 'left';
+
+    ctx.fillText(label, textX, y);
+    // Value (right aligned in fixed column)
+
+    ctx.fillStyle = valueColor;
+
+    ctx.font = valueStyle;
+
+    ctx.textAlign = 'left'; // keep left alignment
+
+    ctx.fillText(value, valueColumnX, y);
+
+}
+// Draw fields (label = black, value = styled)
+
+drawLabelValue('Vehicle Number:', lr.vehicleNumber, textYStart, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+drawLabelValue('From Code:', lr.fromCode, textYStart + lineHeight, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+drawLabelValue('To Code:', lr.toCode, textYStart + lineHeight * 2, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+drawLabelValue('Trip ID:', lr.tripId, textYStart + lineHeight * 3, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+drawLabelValue('Date:', lr.date, textYStart + lineHeight * 4, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+drawLabelValue('Litres:', `${lr.litres}`, textYStart + lineHeight * 5, 
+
+              'bold 24px Inter, sans-serif', '22px Inter, sans-serif', 'black');
+ 
+
+ 
+
+                // --- Trigger Download ---
+
+                const link = document.createElement('a');
+
+                link.download = `LR_${lr.tripId}.jpg`;
+
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+
+                link.click();
+                showAlert(`Downloading LR image for Trip ID ${tripId}.`, 'success');
+
+                tripIdLrDownloadInput.value = '';
+            });
+
+            // --- NEW: Details Page Event Listener ---
+            searchDetailsBtn.addEventListener('click', () => {
+                const fromDateStr = fromDateInput.value;
+                const toDateStr = toDateInput.value;
+
+                if (!fromDateStr || !toDateStr) {
+                    showAlert('Please select both a "From" and "To" date.', 'error');
+                    return;
+                }
+                
+                // Convert date strings to Date objects for comparison.
+                const fromDate = new Date(fromDateStr);
+                const toDate = new Date(toDateStr);
+                
+                // Filter lrData based on the date range (inclusive)
+                const filteredLrs = lrData.filter(lr => {
+                    const lrDate = new Date(lr.date);
+                    return lrDate >= fromDate && lrDate <= toDate;
+                });
+
+                if (filteredLrs.length === 0) {
+                    showAlert('No diesel coupons found for the selected date range.', 'error');
+                    detailsResults.classList.add('hidden');
+                    return;
+                }
+
+                // Calculate stats
+                const totalLRs = filteredLrs.length;
+                const uploadedCount = filteredLrs.filter(lr => 
+                    uploadedPods.some(pod => pod.tripId === lr.tripId)
+                ).length;
+                const pendingCount = totalLRs - uploadedCount;
+
+                // Update stat displays
+                totalLrsStat.textContent = totalLRs;
+                uploadedLrsStat.textContent = uploadedCount;
+                pendingLrsStat.textContent = pendingCount;
+                
+                // Populate the details table
+                detailsListBody.innerHTML = ''; // Clear previous results
+                
+                filteredLrs.forEach((lr, index) => {
+                    const isUploaded = uploadedPods.some(pod => pod.tripId === lr.tripId);
+                    
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-gray-50';
+                    
+                    // MODIFIED TABLE ROW INNERHTML
+                    row.innerHTML = `
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${index + 1}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.date}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.vehicleNumber}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.tripId}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.fromCode}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.toCode}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">${lr.litres} </td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-center">
+                            ${isUploaded 
+                                ? '<span class="text-green-600 font-bold text-xl" title="Uploaded">✓</span>' 
+                                : '<span class="text-red-600 font-bold text-xl" title="Pending">✗</span>'
+                            }
+                        </td>
+                    `;
+                    
+                    detailsListBody.appendChild(row);
+                });
+
+                // Show the results section
+                detailsResults.classList.remove('hidden');
+                showAlert('Details loaded successfully.', 'success');
+            });
+
+
+            // Navigation button event listeners
+
+            navUploadBtn.addEventListener('click', () => showPage('upload'));
+
+            navDownloadBtn.addEventListener('click', () => showPage('download'));
+
+            navDeleteBtn.addEventListener('click', () => showPage('delete'));
+
+            navCreateLrBtn.addEventListener('click', () => showPage('create-lr'));
+            navDetailsBtn.addEventListener('click', () => showPage('details')); // NEW
+
+            
+            // Set the initial page on load
+
+            showPage('upload');
+
+        });
+
+    </script>
+</body>
+</html>
+
